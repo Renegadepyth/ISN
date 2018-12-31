@@ -1,0 +1,65 @@
+#coding:utf-8
+import sys
+import os
+from Tkinter import *
+from random import *
+
+def restart():
+    python = sys.executable
+    os.execl(python, python, * sys.argv)
+
+def jeu():
+    root.destroy()
+    root2 = Tk()
+    root2.title("Binary Game")
+    root2.geometry("500x350+50+50")
+    root2.resizable(width=False, height=False)
+    root2['bg'] = 'black'
+    #####
+    menu = Menu(root2)
+    root2.config(menu=menu)
+    subFichier=Menu(menu)
+    menu.add_cascade(label="Fichier", menu=subFichier)
+    subFichier.add_command(label="Nouvelle partie", command=restart)
+    subFichier.add_separator()
+    subFichier.add_command(label="Quitter", command=root2.quit)
+    #####
+    difchoisie = Label(root2, pady=30, text="Donnez la valeur décimale de ce nombre : ", font=("Courier New", 18), bg="black", fg="green").pack()
+    nbdisp = Label(root2, text=bin(nb), font=("Courier New", 20), bg="black", fg="green").pack()
+    entrynbdec = Entry(root2, width=5, font=("Courier New", 20), justify=CENTER).pack(side=TOP, pady=30)
+    boutonvalid = Button(root2, text="Valider", highlightbackground="black").pack()
+    root2.mainloop()
+
+
+def nb1():
+    nb=randint(0,16)
+    jeu()
+
+def nb2():
+    nb=randint(0,256)
+    jeu()
+
+def nb3():
+    nb=randint(0,4096)
+    jeu ()
+
+
+
+root = Tk()
+root.title("Binary Game")
+root.geometry("500x350+50+50")
+root.resizable(width=False, height=False)
+root['bg'] = 'black'
+menu = Menu(root)
+root.config(menu=menu)
+subFichier=Menu(menu)
+menu.add_cascade(label="Fichier", menu=subFichier)
+subFichier.add_command(label="Nouvelle partie", command=restart)
+subFichier.add_separator()
+subFichier.add_command(label="Quitter", command=root.quit)
+bienvenue = Label(root, pady=30, text="Bienvenue sur Binary Game !", font =("Courier New", 24), bg="black", fg="green").pack()
+choixdif = Label(root, pady=25, text="Veuillez choisir la difficulté.", font =("Courier New", 18), bg="black", fg="green").pack()
+boutondif1 = Button(root, text="Facile", highlightbackground ="black", command=nb1).pack()
+boutondif2 = Button(root, text="Moyenne", highlightbackground ="black",command=nb2).pack()
+boutondif3 = Button(root, text="Difficile", highlightbackground ="black", command=nb3).pack()
+root.mainloop()
