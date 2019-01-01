@@ -2,13 +2,40 @@
 import sys
 import os
 from Tkinter import *
+from tkMessageBox import *
 from random import *
 
 def restart():
     python = sys.executable
     os.execl(python, python, * sys.argv)
 
-def jeu():
+
+def nb1():
+    nb=randint(0,16)
+    jeu(nb)
+
+def nb2():
+    nb=randint(17,256)
+    jeu(nb)
+
+def nb3():
+    nb=randint(257,4096)
+    jeu(nb)
+
+
+def checkansw(nb):
+    print nb
+    print answ
+    if answ == int(nb, 2):
+        print "nice"
+        #showinfo('Résultat','Bravo !')
+        #restart()
+    else:
+        print "bad"
+        #showwarning('Résultat','Incorrect !')
+
+def jeu(nb):
+    nb=format(nb, 'b')
     root.destroy()
     root2 = Tk()
     root2.title("Binary Game")
@@ -16,37 +43,23 @@ def jeu():
     root2.resizable(width=False, height=False)
     root2['bg'] = 'black'
     #####
-    menu = Menu(root2)
-    root2.config(menu=menu)
-    subFichier=Menu(menu)
-    menu.add_cascade(label="Fichier", menu=subFichier)
-    subFichier.add_command(label="Nouvelle partie", command=restart)
-    subFichier.add_separator()
-    subFichier.add_command(label="Quitter", command=root2.quit)
+    #menu = Menu(root2)
+    #root2.config(menu=menu)
+    #subFichier=Menu(menu)
+    #menu.add_cascade(label="Fichier", menu=subFichier)
+    #subFichier.add_command(label="Nouvelle partie", command=restart)
+    #subFichier.add_separator()
+    #subFichier.add_command(label="Quitter", command=root2.quit)
     #####
     difchoisie = Label(root2, pady=30, text="Donnez la valeur décimale de ce nombre : ", font=("Courier New", 18), bg="black", fg="green").pack()
-    nbdisp = Label(root2, text=bin(nb), font=("Courier New", 20), bg="black", fg="green").pack()
-    entrynbdec = Entry(root2, width=5, font=("Courier New", 20), justify=CENTER).pack(side=TOP, pady=30)
-    boutonvalid = Button(root2, text="Valider", highlightbackground="black").pack()
+    nbdisp = Label(root2, text=nb, font=("Courier New", 20), bg="black", fg="green").pack()
+    entryansw = Entry(root2, width=5, font=("Courier New", 20), justify=CENTER)
+    entryansw.pack(side=TOP, pady=30)
+    boutonvalid = Button(root2, text="Valider", highlightbackground="black", command=checkansw(nb)).pack()
     root2.mainloop()
 
 
-def nb1():
-    nb=randint(0,16)
-    jeu()
-
-def nb2():
-    nb=randint(0,256)
-    jeu()
-
-def nb3():
-    nb=randint(0,4096)
-    jeu ()
-
-
-
 root = Tk()
-root.title("Binary Game")
 root.geometry("500x350+50+50")
 root.resizable(width=False, height=False)
 root['bg'] = 'black'
