@@ -24,6 +24,7 @@ def nb3():
 
 
 def checkansw(nb):
+    #answ is the variable which contain entryansw.get()
     print nb
     print answ
     if answ == int(nb, 2):
@@ -42,15 +43,6 @@ def jeu(nb):
     root2.geometry("500x350+50+50")
     root2.resizable(width=False, height=False)
     root2['bg'] = 'black'
-    #####
-    #menu = Menu(root2)
-    #root2.config(menu=menu)
-    #subFichier=Menu(menu)
-    #menu.add_cascade(label="Fichier", menu=subFichier)
-    #subFichier.add_command(label="Nouvelle partie", command=restart)
-    #subFichier.add_separator()
-    #subFichier.add_command(label="Quitter", command=root2.quit)
-    #####
     difchoisie = Label(root2, pady=30, text="Donnez la valeur décimale de ce nombre : ", font=("Courier New", 18), bg="black", fg="green").pack()
     nbdisp = Label(root2, text=nb, font=("Courier New", 20), bg="black", fg="green").pack()
     entryansw = Entry(root2, width=5, font=("Courier New", 20), justify=CENTER)
@@ -63,13 +55,6 @@ root = Tk()
 root.geometry("500x350+50+50")
 root.resizable(width=False, height=False)
 root['bg'] = 'black'
-menu = Menu(root)
-root.config(menu=menu)
-subFichier=Menu(menu)
-menu.add_cascade(label="Fichier", menu=subFichier)
-subFichier.add_command(label="Nouvelle partie", command=restart)
-subFichier.add_separator()
-subFichier.add_command(label="Quitter", command=root.quit)
 bienvenue = Label(root, pady=30, text="Bienvenue sur Binary Game !", font =("Courier New", 24), bg="black", fg="green").pack()
 choixdif = Label(root, pady=25, text="Veuillez choisir la difficulté.", font =("Courier New", 18), bg="black", fg="green").pack()
 boutondif1 = Button(root, text="Facile", highlightbackground ="black", command=nb1).pack()
