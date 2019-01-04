@@ -1,14 +1,7 @@
 #coding:utf-8
-import sys
-import os
 from Tkinter import *
 from tkMessageBox import *
 from random import *
-
-def restart():
-    python = sys.executable
-    os.execl(python, python, * sys.argv)
-
 
 def nb1():
     nb=randint(0,16)
@@ -23,17 +16,19 @@ def nb3():
     jeu(nb)
 
 
-def checkansw(nb):
-    #answ is the variable which contain entryansw.get()
+def checkansw(answ, nb):
+    nb = int(nb, 2)
+    answ = float(answ)
+    answ = int(answ)
     print nb
     print answ
-    if answ == int(nb, 2):
-        print "nice"
-        #showinfo('Résultat','Bravo !')
-        #restart()
+    if nb == answ:
+        showinfo('Résultat','Bravo !')
+        if >= nb <=:
+        elif:
+        else:
     else:
-        print "bad"
-        #showwarning('Résultat','Incorrect !')
+        showwarning('Résultat','Incorrect !')
 
 def jeu(nb):
     nb=format(nb, 'b')
@@ -43,18 +38,31 @@ def jeu(nb):
     root2.geometry("500x350+50+50")
     root2.resizable(width=False, height=False)
     root2['bg'] = 'black'
+    #####
+    menu = Menu(root2)
+    root2.config(menu=menu)
+    subFichier=Menu(menu)
+    menu.add_cascade(label="Fichier", menu=subFichier)
+    subFichier.add_command(label="Quitter", command=root2.quit)
+    #####
     difchoisie = Label(root2, pady=30, text="Donnez la valeur décimale de ce nombre : ", font=("Courier New", 18), bg="black", fg="green").pack()
     nbdisp = Label(root2, text=nb, font=("Courier New", 20), bg="black", fg="green").pack()
     entryansw = Entry(root2, width=5, font=("Courier New", 20), justify=CENTER)
     entryansw.pack(side=TOP, pady=30)
-    boutonvalid = Button(root2, text="Valider", highlightbackground="black", command=checkansw(nb)).pack()
+    boutonvalid = Button(root2, text="Valider", highlightbackground="black", command=lambda: checkansw(entryansw.get(), nb)).pack()
     root2.mainloop()
 
 
+"--------    1ère fenetre    --------"
 root = Tk()
 root.geometry("500x350+50+50")
 root.resizable(width=False, height=False)
 root['bg'] = 'black'
+menu = Menu(root)
+root.config(menu=menu)
+subFichier=Menu(menu)
+menu.add_cascade(label="Fichier", menu=subFichier)
+subFichier.add_command(label="Quitter", command=root.quit)
 bienvenue = Label(root, pady=30, text="Bienvenue sur Binary Game !", font =("Courier New", 24), bg="black", fg="green").pack()
 choixdif = Label(root, pady=25, text="Veuillez choisir la difficulté.", font =("Courier New", 18), bg="black", fg="green").pack()
 boutondif1 = Button(root, text="Facile", highlightbackground ="black", command=nb1).pack()
