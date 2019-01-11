@@ -5,6 +5,7 @@ from random import *
 
 class Lobby():
     def __init__(self):
+        global root
         root = Tk()
         root.geometry("600x350+50+50")
         root.resizable(width=False, height=False)
@@ -16,22 +17,29 @@ class Lobby():
         subFichier.add_command(label="Quitter", command=root.destroy)
         bienvenue = Label(root, pady=30, text="Bienvenue sur Binary Game !", font =("Courier New", 24), bg="black", fg="green").pack()
         choixdif = Label(root, pady=25, text="Veuillez choisir la difficulté.", font =("Courier New", 18), bg="black", fg="green").pack()
-        boutondif1 = Button(root, text="Facile", highlightbackground ="black", command=nb1).pack()
-        boutondif2 = Button(root, text="Moyenne", highlightbackground ="black",command=nb2).pack()
-        boutondif3 = Button(root, text="Difficile", highlightbackground ="black", command=nb3).pack()
+        boutondif1 = Button(root, text="Facile", highlightbackground ="black", command=self.nb1).pack()
+        boutondif2 = Button(root, text="Moyenne", highlightbackground ="black",command=self.nb2).pack()
+        boutondif3 = Button(root, text="Difficile", highlightbackground ="black", command=self.nb3).pack()
         root.mainloop()
+
+    def restart1(self):
+        root.destroy()
+        Lobby()
+
+    def restart2(self):
+
 
     def nb1(self):
         nb=randint(0,16)
-        jeu(self)
+        self.jeu(nb)
 
     def nb2(self):
         nb=randint(17,256)
-        jeu(self)
+        self.jeu(nb)
 
     def nb3(self):
         nb=randint(257,4096)
-        jeu(self)
+        self.jeu(nb)
 
     def checkansw(self, root2, answ, nb):
         nb = int(nb, 2)
@@ -39,27 +47,25 @@ class Lobby():
         answ = int(answ)
         if nb == answ:
             messagebox.showinfo('Résultat','Bravo !')
+            root2.destroy()
+            Lobby()
         else:
             messagebox.showwarning('Résultat','Incorrect !')
 
-    def jeu(self):
+    def jeu(self, nb):
         nb=format(nb, 'b')
-        #root.quit()
+        root.destroy()
+        global root2
         root2 = Tk()
         root2.title("Binary Game")
         root2.geometry("600x350+50+50")
         root2.resizable(width=False, height=False)
         root2['bg'] = 'black'
-        menu = Menu(root2)
-        root2.config(menu=menu)
-        subFichier=Menu(menu)
-        menu.add_cascade(label="Fichier", menu=subFichier)
-        subFichier.add_command(label="Quitter", command=root2.destroy)
         difchoisie = Label(root2, pady=30, text="Donnez la valeur décimale de ce nombre : ", font=("Courier New", 18), bg="black", fg="green").pack()
         nbdisp = Label(root2, text=nb, font=("Courier New", 20), bg="black", fg="green").pack()
         entryansw = Entry(root2, width=5, font=("Courier New", 20), justify=CENTER)
         entryansw.pack(side=TOP, pady=30)
-        boutonvalid = Button(root2, text="Valider", highlightbackground="black", command=lambda: checkansw(root2, entryansw.get(), nb)).pack()
+        boutonvalid = Button(root2, text="Valider", highlightbackground="black", command=lambda: self.checkansw(root2, entryansw.get(), nb)).pack()
         root2.mainloop()
 
 Lobby()
