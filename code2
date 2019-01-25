@@ -1,12 +1,13 @@
 #coding:utf-8
-from tkinter import *
-from tkinter import messagebox
+from Tkinter import *
+from tkMessageBox import *
 from random import *
 
 class Lobby():
     def __init__(self):
         global root
         root = Tk()
+        root.title("Binary Game")
         root.geometry("600x350+50+50")
         root.resizable(width=False, height=False)
         root['bg'] = 'black'
@@ -20,13 +21,22 @@ class Lobby():
         boutondif1 = Button(root, text="Facile", highlightbackground ="black", command=self.nb1).pack()
         boutondif2 = Button(root, text="Moyenne", highlightbackground ="black",command=self.nb2).pack()
         boutondif3 = Button(root, text="Difficile", highlightbackground ="black", command=self.nb3).pack()
+        boutonquit = Button(root, text="Quitter", highlightbackground="black", command=root.destroy)
+        boutonquit.pack(padx=50,side=LEFT)
+        boutonjeu = Button(root, text="Binary Game ?", highlightbackground="black", command=self.btbg)
+        boutonjeu.pack(padx=50,side=RIGHT)
         root.mainloop()
 
-    def restart1(self):
-        root.destroy()
-        Lobby()
+    def btbg(self):
+        root3=Tk()
+        root3.title("Binary Game ?")
+        root3.geometry("600x350+200+200")
+        root3.resizable(width=False, height=False)
+        root3['bg'] = 'black'
+        bg=Label(root3, pady=25, text="Binary Game est un jeu où le joueur \n doit donner la valeur décimale \n correspondante à la valeur binaire \n qui sera générée aléatoirement.\n Trois difficultés sont proposées.", font =("Courier New", 20), bg="black", fg="green").pack()
+        bg=Label(root3, pady=40, text="Ce jeu a été crée par : \n Langlois Mattéo,\n Ilmaz Seyhan,\n Mfouara Marc \net Mazoyer Brandon", font =("Courier New", 20), bg="black", fg="green").pack()
+        root3.mainloop()
 
-    def restart2(self):
 
 
     def nb1(self):
@@ -46,11 +56,11 @@ class Lobby():
         answ = float(answ)
         answ = int(answ)
         if nb == answ:
-            messagebox.showinfo('Résultat','Bravo !')
+            showinfo('Résultat','Bravo !')
             root2.destroy()
             Lobby()
         else:
-            messagebox.showwarning('Résultat','Incorrect !')
+            showwarning('Résultat','Incorrect !')
 
     def jeu(self, nb):
         nb=format(nb, 'b')
@@ -61,6 +71,11 @@ class Lobby():
         root2.geometry("600x350+50+50")
         root2.resizable(width=False, height=False)
         root2['bg'] = 'black'
+        menu = Menu(root2)
+        root2.config(menu=menu)
+        subFichier2=Menu(menu)
+        menu.add_cascade(label="Fichier", menu=subFichier2)
+        subFichier2.add_command(label="Quitter", command=root2.destroy)
         difchoisie = Label(root2, pady=30, text="Donnez la valeur décimale de ce nombre : ", font=("Courier New", 18), bg="black", fg="green").pack()
         nbdisp = Label(root2, text=nb, font=("Courier New", 20), bg="black", fg="green").pack()
         entryansw = Entry(root2, width=5, font=("Courier New", 20), justify=CENTER)
@@ -69,3 +84,4 @@ class Lobby():
         root2.mainloop()
 
 Lobby()
+
